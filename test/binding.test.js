@@ -4,7 +4,9 @@ var vows = require('vows'),
 
 var codex = require('../');
 
-vows.describe('Codex Binding').addBatch({
+var suite = vows.describe('Codex Binding');
+
+suite.addBatch({
   'single file binding': {
     topic: new(codex.binding)( path.join(__dirname, 'include', 'me.js') ),
     'knows which files to include': function (binding) {
@@ -36,13 +38,17 @@ vows.describe('Codex Binding').addBatch({
           '',
           'function test(me) {',
           '  return me;',
-          '}'
+          '}',
+          ''
         ].join('\n');
         
         assert.equal(success, result);
       }
     }
-  },
+  }
+});
+
+suite.addBatch({
   'multiple file binding': {
     topic: new(codex.binding)([
       path.join(__dirname, 'include', 'me.js'),
@@ -67,6 +73,7 @@ vows.describe('Codex Binding').addBatch({
         return b;
       }, Error);
     }
-  },
-  
-}).export(module);
+  }  
+});
+
+suite.export(module);
