@@ -1,3 +1,3 @@
-function test(me) {
-  return me;
+function me(test) {
+  return test;
 }
