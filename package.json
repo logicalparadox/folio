@@ -1,0 +1,28 @@
+{
+  "author": "Jake Luer <@jakeluer>",
+  "name": "codex",
+  "description": "Asset installation, management, and browserfication.",
+  "version": "0.0.1",
+  "repository": { 
+    "type": "git", 
+    "url": "https://github.com/logicalparadox/codex"
+  },
+  "main": "index",
+  "bin" : {
+    "nerve": "./bin/codex"
+  },
+  "engines": {
+    "node": ">= v0.4.8"
+  },
+  "scripts": {
+    "prepublish" : "npm prune"
+  },
+  "dependencies": {
+    "colors": "0.5.x",
+    "commander": "0.2.x",
+    "mkdirp": "0.0.7"
+  },
+  "devDependencies": {
+    "vows": "0.5.x"
+  }
+}
