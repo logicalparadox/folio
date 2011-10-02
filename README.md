@@ -43,11 +43,6 @@ Tests are built on [vows](http://vowsjs.org).
 
 `$ vows test/*.test.js --spec`
 
-## Roadmap
-
-* Caching of served files
-* Wrappers for each file in binding.
-
 ## License
 
 (The MIT License)
