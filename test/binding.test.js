@@ -144,4 +144,49 @@ suite.addBatch({
   }  
 });
 
+suite.addBatch({
+  'nested file bindings': {
+    topic: new(codex.binding)([
+      path.join(__dirname, 'include', 'me.js'),
+      new codex.binding([
+        path.join(__dirname, 'include', 'you.js')
+      ], { minify: true })
+    ]),
+    'knows which files to include': function (binding) {
+      assert.isArray(binding.files);
+      assert.length(binding.files, 2);
+    },
+    'knows what type of output': function (binding) {
+      assert.isString(binding.type);
+      assert.equal(binding.type, '.js');
+    },
+    'throws error if file doesn\'t exist': function (binding) {
+      assert.throws(function() {
+        var b = new(codex.binding)([
+          path.join(__dirname, 'include', 'me.js'),
+          new codex.binding([
+            path.join(__dirname, 'include', 'bad.js')
+          ])
+        ]);
+        return b;
+      }, Error);
+    },
+    'can be compiled': {
+      topic: function (binding) {
+        binding.compile(this.callback);
+      },
+      'without error': function (error, success) {
+        assert.isNull(error);
+        assert.isNotNull(success);
+        assert.isString(success);
+      },
+      'with nested only minified data': function (error, success) {
+        var result = '\nfunction me(test) {\n  return test;\n}\nfunction you(a){return a}';
+        
+        assert.equal(success, result);
+      }
+    }
+  }
+});
+
 suite.export(module);

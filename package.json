@@ -21,7 +21,8 @@
     "colors": "0.5.x",
     "commander": "0.2.x",
     "mkdirp": "0.0.7",
-    "uglify-js": "1.1.x"
+    "uglify-js": "1.1.x",
+    "async": "0.1.x"
   },
   "devDependencies": {
     "vows": "0.5.x",

@@ -21,9 +21,17 @@ suite.addBatch({
       var binding_min = new codex.binding([
           require.resolve('./include/me.js')
         ], { minify: true });
+        
+      var binding_nested = new codex.binding([
+          require.resolve('./include/me.js'),
+          new codex.binding([
+              require.resolve('./include/you.js')
+            ], { minify: true })
+        ]);
       
       server.get('/me.js', codex.serve(binding));
       server.get('/me.min.js', codex.serve(binding_min));
+      server.get('/me.you.js', codex.serve(binding_nested));
       
       server.listen(8003);
       return server;
@@ -63,6 +71,22 @@ suite.addBatch({
       },
       'with correct data': function (error, response, body) {
         var result = 'function me(a){return a}';
+        assert.equal(body, result);
+      }
+    },
+    'can serve a nested codex': {
+      topic: function (server) {
+        request.get('http://localhost:8003/me.you.js', this.callback);
+      },
+      'with response 200': function (error, response, body) {
+        assert.isNull(error);
+        assert.equal(response.statusCode, 200);
+      },
+      'with headers text/javascript': function (error, response, body) {
+        assert.equal(response.headers['content-type'], 'text/javascript');
+      },
+      'with correct data': function (error, response, body) {
+        var result = '\nfunction me(test) {\n  return test;\n}\nfunction you(a){return a}';
         assert.equal(body, result);
       }
     }
