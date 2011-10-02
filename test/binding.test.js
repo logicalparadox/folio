@@ -189,4 +189,50 @@ suite.addBatch({
   }
 });
 
+suite.addBatch({
+  'multiple file binding wrappers': {
+    topic: function() {
+      
+      return new(codex.binding)([
+        path.join(__dirname, 'include', 'me.js'),
+        new codex.binding([
+          path.join(__dirname, 'include', 'you.js')
+        ], { 
+          minify: true, 
+          prefix: 'function prefixinside() {\n',
+          suffix: 'return you(\'inside\');\n}'
+        })
+      ], {
+        prefix: 'function prefix() {\n',
+        suffix: 'return me(\'test\');\n}'
+      });
+    },
+    'knows which files to include': function (binding) {
+      assert.isArray(binding.files);
+      assert.length(binding.files, 2);
+    },
+    'knows what type of output': function (binding) {
+      assert.isString(binding.type);
+      assert.equal(binding.type, '.js');
+    },
+    'can be compiled': {
+      topic: function (binding) {
+        binding.compile(this.callback);
+      },
+      'without error': function (error, success) {
+        assert.isNull(error);
+        assert.isNotNull(success);
+        assert.isString(success);
+      },
+      'with wrapped data and nested minified': function (error, success) {
+        var result = ['function prefix() {\n\nfunction me(test) {\n  return test;\n}',
+          '\nreturn me(\'test\');\n}function prefixinside(){',
+          'function a(a){return a}return a("inside")}'];
+        
+        assert.equal(success, result.join(''));
+      }
+    }
+  }
+});
+
 suite.export(module);

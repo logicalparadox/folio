@@ -29,9 +29,24 @@ suite.addBatch({
             ], { minify: true })
         ]);
       
+      var binding_wrapped = new(codex.binding)([
+        path.join(__dirname, 'include', 'me.js'),
+        new codex.binding([
+          path.join(__dirname, 'include', 'you.js')
+        ], { 
+          minify: true, 
+          prefix: 'function prefixinside() {\n',
+          suffix: 'return you(\'inside\');\n}'
+        })
+      ], {
+        prefix: 'function prefix() {\n',
+        suffix: 'return me(\'test\');\n}'
+      });
+      
       server.get('/me.js', codex.serve(binding));
       server.get('/me.min.js', codex.serve(binding_min));
       server.get('/me.you.js', codex.serve(binding_nested));
+      server.get('/me.wrapped.js', codex.serve(binding_wrapped));
       
       server.listen(8003);
       return server;
@@ -88,6 +103,25 @@ suite.addBatch({
       'with correct data': function (error, response, body) {
         var result = '\nfunction me(test) {\n  return test;\n}\nfunction you(a){return a}';
         assert.equal(body, result);
+      }
+    },
+    'can serve a nested & wrapped codex': {
+      topic: function (server) {
+        request.get('http://localhost:8003/me.wrapped.js', this.callback);
+      },
+      'with response 200': function (error, response, body) {
+        assert.isNull(error);
+        assert.equal(response.statusCode, 200);
+      },
+      'with headers text/javascript': function (error, response, body) {
+        assert.equal(response.headers['content-type'], 'text/javascript');
+      },
+      'with correct data': function (error, response, body) {
+        var result = ['function prefix() {\n\nfunction me(test) {\n  return test;\n}',
+          '\nreturn me(\'test\');\n}function prefixinside(){',
+          'function a(a){return a}return a("inside")}'];
+        
+        assert.equal(body, result.join(''));
       }
     }
   }
