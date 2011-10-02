@@ -14,24 +14,24 @@ suite.addBatch({
     topic: function () {
       var server = express.createServer();
       
-      var binding = new codex.binding([
+      var glossary = new codex.glossary([
           require.resolve('./include/me.js')
         ]);
         
-      var binding_min = new codex.binding([
+      var glossary_min = new codex.glossary([
           require.resolve('./include/me.js')
         ], { minify: true });
         
-      var binding_nested = new codex.binding([
+      var glossary_nested = new codex.glossary([
           require.resolve('./include/me.js'),
-          new codex.binding([
+          new codex.glossary([
               require.resolve('./include/you.js')
             ], { minify: true })
         ]);
       
-      var binding_wrapped = new(codex.binding)([
+      var glossary_wrapped = new(codex.glossary)([
         path.join(__dirname, 'include', 'me.js'),
-        new codex.binding([
+        new codex.glossary([
           path.join(__dirname, 'include', 'you.js')
         ], { 
           minify: true, 
@@ -43,10 +43,10 @@ suite.addBatch({
         suffix: 'return me(\'test\');\n}'
       });
       
-      server.get('/me.js', codex.serve(binding));
-      server.get('/me.min.js', codex.serve(binding_min));
-      server.get('/me.you.js', codex.serve(binding_nested));
-      server.get('/me.wrapped.js', codex.serve(binding_wrapped));
+      server.get('/me.js', codex.serve(glossary));
+      server.get('/me.min.js', codex.serve(glossary_min));
+      server.get('/me.you.js', codex.serve(glossary_nested));
+      server.get('/me.wrapped.js', codex.serve(glossary_wrapped));
       
       server.listen(8003);
       return server;
