@@ -1,4 +1,11 @@
 
+0.0.4 / 2011-10-02 
+==================
+
+  * readme updates - glossary
+  * renamed binding to glossary. ('binding' too related to nodejs event language)
+  * readme cleanup
+
 0.0.3 / 2011-10-02 
 ==================
 
