@@ -14,13 +14,13 @@ var path = require('path'),
     codex = require('codex');
 
 // normal output
-var binding = new codex.binding([
+var glossary = new codex.glossary([
   path.join(__dirname, 'assets', 'first.js'),
   path.join(__dirname, 'assets', 'second.js')
 ], { minify: true });
 
 // build tasks
-binding.compile(function(err, source) {
+glossary.compile(function(err, source) {
   fs.writeFileSync('assets.min.js', source);
 });
 ```
@@ -32,7 +32,7 @@ The same binding can easily be served using express.
 ```js
 var server = require('express').createServer();
 
-server.get('/assets.min.js', codex.serve(binding));
+server.get('/assets.min.js', codex.serve(glossary));
 
 server.listen(8000);
 ```
