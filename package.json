@@ -27,6 +27,7 @@
   "devDependencies": {
     "vows": "0.5.x",
     "jq": "1.6.x",
+    "seed": "0.0.x",
     "express": "2.4.x",
     "request": "2.1.x"
   }
