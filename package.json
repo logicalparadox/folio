@@ -1,16 +1,13 @@
 {
   "author": "Jake Luer <@jakeluer>",
-  "name": "codex",
+  "name": "folio",
   "description": "Asset installation, management, and browserfication.",
   "version": "0.0.4",
   "repository": { 
     "type": "git", 
-    "url": "https://github.com/logicalparadox/codex"
+    "url": "https://github.com/logicalparadox/folio"
   },
   "main": "index",
-  "bin" : {
-    "nerve": "./bin/codex"
-  },
   "engines": {
     "node": ">= v0.4.8"
   },
