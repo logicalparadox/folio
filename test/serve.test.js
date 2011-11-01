@@ -5,33 +5,33 @@ var vows = require('vows'),
     
 var express = require('express');
 
-var codex = require('../');
+var folio = require('../');
 
-var suite = vows.describe('Codex Serve');
+var suite = vows.describe('Folio Serve');
 
 suite.addBatch({
   'express server': {
     topic: function () {
       var server = express.createServer();
       
-      var glossary = new codex.glossary([
+      var glossary = new folio.glossary([
           require.resolve('./include/me.js')
         ]);
         
-      var glossary_min = new codex.glossary([
+      var glossary_min = new folio.glossary([
           require.resolve('./include/me.js')
         ], { minify: true });
         
-      var glossary_nested = new codex.glossary([
+      var glossary_nested = new folio.glossary([
           require.resolve('./include/me.js'),
-          new codex.glossary([
+          new folio.glossary([
               require.resolve('./include/you.js')
             ], { minify: true })
         ]);
       
-      var glossary_wrapped = new(codex.glossary)([
+      var glossary_wrapped = new(folio.glossary)([
         path.join(__dirname, 'include', 'me.js'),
-        new codex.glossary([
+        new folio.glossary([
           path.join(__dirname, 'include', 'you.js')
         ], { 
           minify: true, 
@@ -43,15 +43,15 @@ suite.addBatch({
         suffix: 'return me(\'test\');\n}'
       });
       
-      server.get('/me.js', codex.serve(glossary));
-      server.get('/me.min.js', codex.serve(glossary_min));
-      server.get('/me.you.js', codex.serve(glossary_nested));
-      server.get('/me.wrapped.js', codex.serve(glossary_wrapped));
+      server.get('/me.js', folio.serve(glossary));
+      server.get('/me.min.js', folio.serve(glossary_min));
+      server.get('/me.you.js', folio.serve(glossary_nested));
+      server.get('/me.wrapped.js', folio.serve(glossary_wrapped));
       
       server.listen(8003);
       return server;
     },
-    'can serve a codex': {
+    'can serve a folio': {
       topic: function (server) {
         request.get('http://localhost:8003/me.js', this.callback);
       },
@@ -73,7 +73,7 @@ suite.addBatch({
         assert.equal(body, result);
       }
     },
-    'can serve a minified codex': {
+    'can serve a minified folio': {
       topic: function (server) {
         request.get('http://localhost:8003/me.min.js', this.callback);
       },
@@ -89,7 +89,7 @@ suite.addBatch({
         assert.equal(body, result);
       }
     },
-    'can serve a nested codex': {
+    'can serve a nested folio': {
       topic: function (server) {
         request.get('http://localhost:8003/me.you.js', this.callback);
       },
@@ -105,7 +105,7 @@ suite.addBatch({
         assert.equal(body, result);
       }
     },
-    'can serve a nested & wrapped codex': {
+    'can serve a nested & wrapped folio': {
       topic: function (server) {
         request.get('http://localhost:8003/me.wrapped.js', this.callback);
       },

@@ -2,13 +2,13 @@ var vows = require('vows'),
     assert = require('assert'),
     path = require('path');
 
-var codex = require('../');
+var folio = require('../');
 
-var suite = vows.describe('Codex Binding');
+var suite = vows.describe('Folio Binding');
 
 suite.addBatch({
   'single file binding': {
-    topic: new(codex.glossary)( path.join(__dirname, 'include', 'me.js') ),
+    topic: new(folio.glossary)( path.join(__dirname, 'include', 'me.js') ),
     'knows which files to include': function (binding) {
       assert.isArray(binding.files);
       assert.length(binding.files, 1);
@@ -20,7 +20,7 @@ suite.addBatch({
     },
     'throws error if file doesn\'t exist': function (binding) {
       assert.throws(function() {
-        var b = new(codex.glossary)(path.join(__dirname, 'include', 'bad.js'));
+        var b = new(folio.glossary)(path.join(__dirname, 'include', 'bad.js'));
         return b;
       }, Error);
     },
@@ -50,7 +50,7 @@ suite.addBatch({
 
 suite.addBatch({
   'multiple file binding': {
-    topic: new(codex.glossary)([
+    topic: new(folio.glossary)([
       path.join(__dirname, 'include', 'me.js'),
       path.join(__dirname, 'include', 'you.js')
     ]),
@@ -66,7 +66,7 @@ suite.addBatch({
     },
     'throws error if file doesn\'t exist': function (binding) {
       assert.throws(function() {
-        var b = new(codex.glossary)([
+        var b = new(folio.glossary)([
           path.join(__dirname, 'include', 'bad.js'),
           require.resolve('jq/dist/jquery')
         ]);
@@ -103,7 +103,7 @@ suite.addBatch({
 
 suite.addBatch({
   'multiple file binding with options': {
-    topic: new(codex.glossary)([
+    topic: new(folio.glossary)([
       path.join(__dirname, 'include', 'me.js'),
       path.join(__dirname, 'include', 'you.js')
     ], { minify: true }),
@@ -119,7 +119,7 @@ suite.addBatch({
     },
     'throws error if file doesn\'t exist': function (binding) {
       assert.throws(function() {
-        var b = new(codex.glossary)([
+        var b = new(folio.glossary)([
           path.join(__dirname, 'include', 'bad.js'),
           require.resolve('jq/dist/jquery')
         ]);
@@ -146,9 +146,9 @@ suite.addBatch({
 
 suite.addBatch({
   'nested file bindings': {
-    topic: new(codex.glossary)([
+    topic: new(folio.glossary)([
       path.join(__dirname, 'include', 'me.js'),
-      new codex.glossary([
+      new folio.glossary([
         path.join(__dirname, 'include', 'you.js')
       ], { minify: true })
     ]),
@@ -162,9 +162,9 @@ suite.addBatch({
     },
     'throws error if file doesn\'t exist': function (binding) {
       assert.throws(function() {
-        var b = new(codex.glossary)([
+        var b = new(folio.glossary)([
           path.join(__dirname, 'include', 'me.js'),
-          new codex.glossary([
+          new folio.glossary([
             path.join(__dirname, 'include', 'bad.js')
           ])
         ]);
@@ -193,9 +193,9 @@ suite.addBatch({
   'multiple file binding wrappers': {
     topic: function() {
       
-      return new(codex.glossary)([
+      return new(folio.glossary)([
         path.join(__dirname, 'include', 'me.js'),
-        new codex.glossary([
+        new folio.glossary([
           path.join(__dirname, 'include', 'you.js')
         ], { 
           minify: true, 
