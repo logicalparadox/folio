@@ -6,15 +6,15 @@ Work in progress. Come back soon.
 
 ### Aggregation
 
-Codex can be used for creating asyncronous builds of client files for javascript.
+Folio can be used for creating asyncronous builds of client files for javascript.
 
 ```js
 var path = require('path'),
     fs = require('fs'),
-    codex = require('codex');
+    folio = require('folio');
 
 // normal output
-var glossary = new codex.glossary([
+var glossary = new folio.glossary([
   path.join(__dirname, 'assets', 'first.js'),
   path.join(__dirname, 'assets', 'second.js')
 ], { minify: true });
@@ -32,7 +32,7 @@ The same binding can easily be served using express.
 ```js
 var server = require('express').createServer();
 
-server.get('/assets.min.js', codex.serve(glossary));
+server.get('/assets.min.js', folio.serve(glossary));
 
 server.listen(8000);
 ```
@@ -47,7 +47,7 @@ Tests are built on [vows](http://vowsjs.org).
 
 (The MIT License)
 
-Copyright (c) 2011 Jake Luer <@jakeluer>
+Copyright (c) 2011 Jake Luer <jake@alogicalparadox.com>
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
