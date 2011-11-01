@@ -1,3 +1,3 @@
 
 
-module.exports = require('./lib/codex');
+module.exports = require('./lib/folio');
