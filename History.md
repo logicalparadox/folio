@@ -1,4 +1,19 @@
 
+0.1.0 / 2011-11-01 
+==================
+
+  * clean up part 2
+  * cleaning up for first official release
+  * renamed to folio. published 0.0.4 on npm
+  * Edited README.md via GitHub
+  * README - Name Change
+  * volume functional
+  * volume & volume tests init
+  * codex.require remove wrappers
+  * serve enhancements to support volumes
+  * initializing codex require feature
+  * renamed binding to glossary tests
+
 0.0.4 / 2011-10-02 
 ==================
 
