@@ -1,6 +1,13 @@
 # Folio
 
-Work in progress. Come back soon.
+Folio is for simple aggregation and serving of client-side javascript libraries. 
+Use as a build tool for client-side libraries or aggregrate you client-side JS for 
+serving via express.
+
+#### Examples
+
+* [Backbone.ioBind](https://github.com/logicalparadox/backbone.iobind) uses Folio to
+build its distributions. Checkout the [Jakefile](https://github.com/logicalparadox/backbone.iobind/blob/master/Jakefile.js)
 
 ## Features
 
