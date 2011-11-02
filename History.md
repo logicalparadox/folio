@@ -1,4 +1,12 @@
 
+0.1.1 / 2011-11-02 
+==================
+
+  * Merge branch 'feature/compilers'
+  * support for compilers based on extension
+  * Readme updates with example.
+  * error parsing package.json - fixed
+
 0.1.0 / 2011-11-01 
 ==================
 
