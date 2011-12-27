@@ -11,9 +11,7 @@
   "engines": {
     "node": ">= v0.4.8"
   },
-  "scripts": {
-    "prepublish" : "npm prune"
-  },
+  "scripts": {},
   "dependencies": {
     "colors": "0.5.x",
     "mkdirp": "0.0.7",
