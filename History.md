@@ -1,4 +1,10 @@
 
+0.1.3 / 2011-12-27 
+==================
+
+  * need to end res in server
+  * no prune on prepublish
+
 0.1.2 / 2011-12-27 
 ==================
 
