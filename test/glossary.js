@@ -1,7 +1,8 @@
 var should = require('chai').should()
   , join = require('path').join;
 
-var folio = require('..');
+var folio = require('..')
+  , Glossary = folio.Glossary;
 
 describe('glossary', function () {
 
@@ -13,14 +14,14 @@ describe('glossary', function () {
 
     it('should throw an error if a file doens\'t exist', function () {
       function buildJs () {
-        var b = new folio.glossary(join(__dirname, 'include', 'bad.js'));
+        var b = new Glossary(join(__dirname, 'include', 'bad.js'));
         return b;
       }
       (buildJs).should.throw(Error);
     });
 
     describe('correctly configured', function () {
-      var binding = new folio.glossary(join(__dirname, 'include', 'me.js'));
+      var binding = new Glossary(join(__dirname, 'include', 'me.js'));
 
       it('should understand thy self', function () {
         binding.files.should.be.instanceof(Array);
@@ -45,7 +46,7 @@ describe('glossary', function () {
 
     it('should throw an error if a file doens\'t exist', function () {
       function buildJs () {
-        var b = new folio.glossary([
+        var b = new Glossary([
             join(__dirname, 'include', 'bad.js')
           , join(__dirname, 'include', 'me.js')
         ]);
@@ -55,7 +56,7 @@ describe('glossary', function () {
     });
 
     describe('correctly configured', function () {
-      var binding = new folio.glossary([
+      var binding = new Glossary([
           join(__dirname, 'include', 'me.js')
         , join(__dirname, 'include', 'you.js')
       ]);
@@ -85,7 +86,7 @@ describe('glossary', function () {
 
     it('should throw an error if a file doens\'t exist', function () {
       function buildJs () {
-        var b = new folio.glossary([
+        var b = new Glossary([
             join(__dirname, 'include', 'bad.js')
           , join(__dirname, 'include', 'me.js')
         ], { minify: true });
@@ -95,7 +96,7 @@ describe('glossary', function () {
     });
 
     describe('correctly configured', function () {
-      var binding = new folio.glossary([
+      var binding = new Glossary([
           join(__dirname, 'include', 'me.js')
         , join(__dirname, 'include', 'you.js')
       ], { minify: true });
@@ -124,9 +125,9 @@ describe('glossary', function () {
 
     it('should throw an error if a file doens\'t exist', function () {
       function buildJs () {
-        var b = new folio.glossary([
+        var b = new Glossary([
             join(__dirname, 'include', 'bad.js')
-          , new folio.glossary(join(__dirname, 'include', 'me.js'))
+          , new Glossary(join(__dirname, 'include', 'me.js'))
         ], { minify: true });
         return b;
       }
@@ -134,9 +135,9 @@ describe('glossary', function () {
     });
 
     describe('correctly configured', function () {
-      var binding = new folio.glossary([
+      var binding = new Glossary([
           join(__dirname, 'include', 'me.js')
-        , new folio.glossary(join(__dirname, 'include', 'you.js'), { minify: true })
+        , new Glossary(join(__dirname, 'include', 'you.js'), { minify: true })
       ]);
 
       it('should understand thy self', function () {
@@ -162,9 +163,9 @@ describe('glossary', function () {
 
     it('should throw an error if a file doens\'t exist', function () {
       function buildJs () {
-        var b = new folio.glossary([
+        var b = new Glossary([
             join(__dirname, 'include', 'bad.js')
-          , new folio.glossary(join(__dirname, 'include', 'me.js'))
+          , new Glossary(join(__dirname, 'include', 'me.js'))
         ], { minify: true });
         return b;
       }
@@ -173,9 +174,9 @@ describe('glossary', function () {
 
     describe('correctly configured', function () {
 
-      var binding = new folio.glossary([
+      var binding = new Glossary([
           join(__dirname, 'include', 'me.js')
-        , new folio.glossary(join(__dirname, 'include', 'you.js'), {
+        , new Glossary(join(__dirname, 'include', 'you.js'), {
               minify: true
             , prefix: 'function prefixinside() {\n'
             , suffix: 'return you(\'inside\');\n}'

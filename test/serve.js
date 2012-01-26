@@ -8,41 +8,34 @@ var folio = require('..');
 describe('serve', function () {
   var server = connect();
 
-  var glossary = new folio.glossary([
+  var glossary = new folio.Glossary([
       require.resolve('./include/me.js')
-    ]);
+  ]);
 
-  var glossary_min = new folio.glossary([
+  var glossary_min = new folio.Glossary([
       require.resolve('./include/me.js')
-    ], { minify: true });
+  ], { minify: true });
 
-  var glossary_nested = new folio.glossary([
-      require.resolve('./include/me.js'),
-      new folio.glossary([
+  var glossary_nested = new folio.Glossary([
+      require.resolve('./include/me.js')
+    , new folio.Glossary([
           require.resolve('./include/you.js')
-        ], { minify: true })
-    ]);
+      ], { minify: true })
+  ]);
 
-  var glossary_wrapped = new(folio.glossary)([
-    path.join(__dirname, 'include', 'me.js'),
-    new folio.glossary([
-      path.join(__dirname, 'include', 'you.js')
-    ], {
-      minify: true,
-      prefix: 'function prefixinside() {\n',
-      suffix: 'return you(\'inside\');\n}'
-    })
+  var glossary_wrapped = new folio.Glossary([
+      path.join(__dirname, 'include', 'me.js')
+    , new folio.Glossary([
+          path.join(__dirname, 'include', 'you.js')
+      ], {
+          minify: true
+        , prefix: 'function prefixinside() {\n'
+        , suffix: 'return you(\'inside\');\n}'
+      })
   ], {
-    prefix: 'function prefix() {\n',
-    suffix: 'return me(\'test\');\n}'
+      prefix: 'function prefix() {\n'
+    , suffix: 'return me(\'test\');\n}'
   });
-
-  var opts = {
-      host: 'localhost'
-    , port: 9897
-    , path: '/'
-    , method: 'GET'
-  }
 
   server.use('/me.js', folio.serve(glossary));
   server.use('/me.min.js', folio.serve(glossary_min));
@@ -58,8 +51,6 @@ describe('serve', function () {
   });
 
   it('should be able to serve a folio', function (done) {
-    var options = opts;
-    options.path = '/me.js';
     request
       .get('localhost:9897/me.js')
       .end(function (res) {
