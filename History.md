@@ -1,4 +1,10 @@
 
+0.2.1 / 2012-01-25 
+==================
+
+  * test for custom compilers
+  * typeof with custom compiler
+
 0.2.0 / 2012-01-25 
 ==================
 
