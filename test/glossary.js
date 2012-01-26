@@ -42,6 +42,29 @@ describe('glossary', function () {
     });
   });
 
+  describe('custom compilers', function () {
+
+    it('should correctly compile', function (done) {
+      var binding = new Glossary(join(__dirname, 'include', 'hello.md'), {
+          compilers: {
+              md: function (name, source, file) {
+                name.should.equal('hello');
+                source.should.equal('# Hello\n\nUniverse\n');
+                file.should.equal(join(__dirname, 'include', 'hello.md'));
+                return '<h1>Hello</h1><p>Universe<p>';
+              }
+          }
+      });
+
+      binding.compile(function (err, res) {
+        should.not.exist(err);
+        res.should.be.a('string');
+        res.should.equal('\n<h1>Hello</h1><p>Universe<p>\n');
+        done();
+      });
+    });
+  });
+
   describe('multiple file binding', function () {
 
     it('should throw an error if a file doens\'t exist', function () {
