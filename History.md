@@ -1,4 +1,20 @@
 
+0.2.0 / 2012-01-25 
+==================
+
+  * renamed main glossary export to Glossary (capitalized)
+  * moved served into main exports
+  * added travis
+  * Merge branch 'refactor/02x'
+  * update serve tests to conform to changes in glossary wrappers
+  * refactored compile functions to make more sense
+  * added glossary tests
+  * update ignore files
+  * refactored tests - serve done
+  * added makefile
+  * added super agent for testing
+  * cleaned up deps - mocha/chai for testing
+
 0.1.3 / 2011-12-27 
 ==================
 
