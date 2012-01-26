@@ -98,10 +98,7 @@ describe('serve', function () {
       .end(function (res) {
         res.should.have.status(200);
         res.should.have.header('content-type', 'text/javascript');
-        var result = ['function prefix() {\n\nfunction me(test) {\n  return test;\n}',
-          '\nreturn me(\'test\');\n}function prefixinside(){',
-          'function a(a){return a}return a("inside")}'];
-        res.text.should.equal(result.join(''));
+        res.text.should.equal('function prefix() {\n\n\nfunction me(test) {\n  return test;\n}\nfunction prefixinside(){function a(a){return a}return a("inside")}\nreturn me(\'test\');\n}');
         done();
       });
   });
