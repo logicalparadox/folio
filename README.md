@@ -64,6 +64,8 @@ var templateJs = new folio.Glossary([
 });
 ```
 
+This is taken from [Backbone.ioBinds](https://github.com/logicalparadox/backbone.iobind)'s example application.
+You can see what is going on in full [here](https://github.com/logicalparadox/backbone.iobind/blob/master/example/routes/index.js).
 
 ## Testing
 
