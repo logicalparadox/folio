@@ -1,4 +1,4 @@
-# Folio
+# Folio [![Build Status](https://secure.travis-ci.org/logicalparadox/folio.png)](http://travis-ci.org/logicalparadox/folio)
 
 Folio is for simple aggregation and serving of client-side javascript libraries. 
 Use as a build tool for client-side libraries or aggregrate you client-side JS for 
@@ -68,7 +68,7 @@ var templateJs = new folio.Glossary([
 ## Testing
 
 Tests are writen in the BDD interface of [Mocha](http://visionmedia.github.com/mocha/) using
-the `should` assertion interface from [Chai](http://chaijs.com). Running the tests are simple
+the `should` assertion interface from [Chai](http://chaijs.com). Running the tests are simple.
 
     make test
 
