@@ -2,18 +2,13 @@
 
 Folio is for simple aggregation and serving of client-side javascript libraries. 
 Use as a build tool for client-side libraries or aggregrate you client-side JS for 
-serving via express.
-
-#### Examples
-
-* [Backbone.ioBind](https://github.com/logicalparadox/backbone.iobind) uses Folio to
-build its distributions. Checkout the [Jakefile](https://github.com/logicalparadox/backbone.iobind/blob/master/Jakefile.js)
+serving via connect/express..
 
 ## Features
 
 ### Aggregation
 
-Folio can be used for creating asyncronous builds of client files for javascript.
+Folio can be used for creating asyncronous builds of your client files.
 
 ```js
 var path = require('path'),
@@ -37,18 +32,45 @@ glossary.compile(function(err, source) {
 The same binding can easily be served using express.
 
 ```js
-var server = require('express').createServer();
-
-server.get('/assets.min.js', folio.serve(glossary));
-
+var server = connect();
+server.use('/assets.min.js', folio.serve(glossary));
 server.listen(8000);
 ```
 
+### Advanced Usage Scenarios
+
+Folio also has support for custom compiler. For example, the following blip with compile several
+jade files for serving. Using jade's runtime, it is not necissary to compile on the client-side.
+
+```js
+var jade = require('jade')
+  , join = require('path').join;
+
+var templateJs = new folio.Glossary([
+  require.resolve('jade/runtime.js'),
+  path.join(__dirname, '..', 'views/templates/js/header.js'),
+  path.join(__dirname, '..', 'views/templates/form.jade'),
+  path.join(__dirname, '..', 'views/templates/item.jade')
+], {
+  compilers: {
+    jade: function (name, source) {
+      return 'template[\'' + name + '\'] = ' +
+        jade.compile(source, {
+          client: true,
+          compileDebug: false
+        }) + ';';
+    }
+  }
+});
+```
+
+
 ## Testing
 
-Tests are built on [vows](http://vowsjs.org).
+Tests are writen in the BDD interface of [Mocha](http://visionmedia.github.com/mocha/) using
+the `should` assertion interface from [Chai](http://chaijs.com). Running the tests are simple
 
-`$ vows test/*.test.js --spec`
+    make test
 
 ## License
 
