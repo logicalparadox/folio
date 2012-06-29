@@ -13,11 +13,11 @@
   },
   "scripts": {},
   "dependencies": {
-    "uglify-js": "1.3.x"
+      "breeze": "0.3.x"
+    , "fsagent": "0.2.x"
+    , "uglify-js": "1.3.x"
   },
   "devDependencies": {
-    "connect": "*",
-    "superagent": "0.5.x",
     "mocha": "*",
     "chai": "*"
   }
