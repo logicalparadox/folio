@@ -14,6 +14,7 @@
   "scripts": {},
   "dependencies": {
       "breeze": "0.3.x"
+    , "drip": "0.3.x"
     , "fsagent": "0.2.x"
     , "uglify-js": "1.3.x"
   },
