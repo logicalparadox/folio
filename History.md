@@ -1,4 +1,21 @@
 
+0.3.0 / 2012-06-30 
+==================
+
+  * readme notice
+  * Merge branch 'refactor/api'
+  * completely refactored everthing
+  * rearrange require strategy
+  * code cleanup for glossary and requires strategy
+  * first functioning example
+  * remove super dep
+  * let the rewrite bergin
+  * clean up deps
+  * update deps
+  * README note on iobind
+  * added travis to README
+  * README updates
+
 0.2.1 / 2012-01-25 
 ==================
 
