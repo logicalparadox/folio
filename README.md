@@ -1,68 +1,9 @@
 # Folio [![Build Status](https://secure.travis-ci.org/logicalparadox/folio.png)](http://travis-ci.org/logicalparadox/folio)
 
-Folio is for simple aggregation and serving of client-side javascript libraries. 
-Use as a build tool for client-side libraries or aggregrate you client-side JS for 
-serving via connect/express..
+Folio is a static javascript build tool with a clean, chainable api and tons of different middleware. 
 
-## Features
-
-### Aggregation
-
-Folio can be used for creating asyncronous builds of your client files.
-
-```js
-var path = require('path'),
-    fs = require('fs'),
-    folio = require('folio');
-
-// normal output
-var glossary = new folio.glossary([
-  path.join(__dirname, 'assets', 'first.js'),
-  path.join(__dirname, 'assets', 'second.js')
-], { minify: true });
-
-// build tasks
-glossary.compile(function(err, source) {
-  fs.writeFileSync('assets.min.js', source);
-});
-```
-
-### Serve files with Express
-
-The same binding can easily be served using express.
-
-```js
-var server = connect();
-server.use('/assets.min.js', folio.serve(glossary));
-server.listen(8000);
-```
-
-### Advanced Usage Scenarios
-
-Folio also has support for custom compiler. For example, the following blip with compile several
-jade files for serving. Using jade's runtime, it is not necissary to compile on the client-side.
-
-```js
-var jade = require('jade')
-  , join = require('path').join;
-
-var templateJs = new folio.Glossary([
-  require.resolve('jade/runtime.js'),
-  path.join(__dirname, '..', 'views/templates/js/header.js'),
-  path.join(__dirname, '..', 'views/templates/form.jade'),
-  path.join(__dirname, '..', 'views/templates/item.jade')
-], {
-  compilers: {
-    jade: function (name, source) {
-      return 'template[\'' + name + '\'] = ' +
-        jade.compile(source, {
-          client: true,
-          compileDebug: false
-        }) + ';';
-    }
-  }
-});
-```
+Version 0.3.x is considered unstable at the moment. Version 0.4.x will have a consistent API.
+Stay tuned for further developments.
 
 This is taken from [Backbone.ioBinds](https://github.com/logicalparadox/backbone.iobind)'s example application.
 You can see what is going on in full [here](https://github.com/logicalparadox/backbone.iobind/blob/master/example/routes/index.js).
