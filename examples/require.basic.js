@@ -1,18 +1,26 @@
 var folio = require('..');
 
 folio('require.basic')
-  .loglevel('debug')
-  .out('./dist')
-  .min(true)
-  .strategy(folio.requires())
+  .root(__dirname)
+  .use(folio.requires())
     .package('basic')
-    .entry('./require_basic/basic.js')
     .dir('./require_basic')
+    .entry('./basic.js')
     .pop()
-  .strategy(folio.wrapper())
+  .use(folio.indent())
+    .line('  ')
+    .pop()
+  .use(folio.wrapper())
+    .package('basic')
+    .expose("require('basic')")
     .template('amd')
     .pop()
-  .compile(function (err) {
-    if (err) throw err;
-    console.log('All done.');
-  });
+  .use(folio.save())
+    .file('./dist/require.basic.js')
+    .pop()
+  .use(folio.minify())
+    .pop()
+  .use(folio.save())
+    .file('./dist/require.basic.min.js')
+    .pop()
+  .compile();
