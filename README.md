@@ -1,12 +1,9 @@
 # Folio [![Build Status](https://secure.travis-ci.org/logicalparadox/folio.png)](http://travis-ci.org/logicalparadox/folio)
 
-Folio is a static javascript build tool with a clean, chainable api and tons of different middleware. 
+Folio is a static javascript build tool with a clean, chainable api and tons of middleware.
 
 Version 0.3.x is considered unstable at the moment. Version 0.4.x will have a consistent API.
 Stay tuned for further developments.
-
-This is taken from [Backbone.ioBinds](https://github.com/logicalparadox/backbone.iobind)'s example application.
-You can see what is going on in full [here](https://github.com/logicalparadox/backbone.iobind/blob/master/example/routes/index.js).
 
 ## Testing
 
