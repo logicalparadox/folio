@@ -1,4 +1,15 @@
 
+0.3.1 / 2012-07-07 
+==================
+
+  * Merge branch 'refactor/clean'
+  * finish commenting
+  * reader middleware comments
+  * minify middleware comments
+  * indent middleware comments
+  * base comments
+  * comments like what (part 1)
+
 0.3.0 / 2012-06-30 
 ==================
 
