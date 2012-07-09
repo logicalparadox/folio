@@ -1,4 +1,18 @@
 
+0.3.2 / 2012-07-09 
+==================
+
+  * Merge branch 'feature/chai-wrappers'
+  * chai-requires prefix/suffix in order:
+  * improve chai-exports wrapper
+  * glossary has correct references for string loaders
+  * support for chai-requires wrapper
+  * add chai-exports wrapper
+  * folio use accepts string for internal middleware. also support custom functional middleware
+  * improvide module.exports handling in amd prefix
+  * update example
+  * readme
+
 0.3.1 / 2012-07-07 
 ==================
 
