@@ -1,4 +1,10 @@
 
+0.3.3 / 2012-07-10 
+==================
+
+  * Merge branch 'bug/gh-1'
+  * sort requires middleware files alphabetically. Closes #1
+
 0.3.2 / 2012-07-09 
 ==================
 
