@@ -2,7 +2,7 @@
   "author": "Jake Luer <@jakeluer>",
   "name": "folio",
   "description": "Tiny static javascript build and serve utility.",
-  "version": "0.3.3",
+  "version": "0.3.4",
   "repository": {
     "type": "git",
     "url": "https://github.com/logicalparadox/folio"
