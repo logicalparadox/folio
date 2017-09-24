@@ -7,7 +7,7 @@ Stay tuned for further developments.
 
 ## Testing
 
-Tests are writen in the BDD interface of [Mocha](http://visionmedia.github.com/mocha/) using
+Tests are writen in the BDD interface of [Mocha](http://mochajs.org/) using
 the `should` assertion interface from [Chai](http://chaijs.com). Running the tests are simple.
 
     make test
